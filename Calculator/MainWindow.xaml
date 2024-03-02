@@ -6,7 +6,7 @@
            xmlns:hc="https://handyorg.github.io/handycontrol"
            xmlns:viewModels="clr-namespace:Сalculator.ViewModels"
            mc:Ignorable="d"
-           Title="MainWindow" Height="430" Width="310" MinHeight="430" MinWidth="310">
+           Title="Calculator" Height="430" Width="310" MinHeight="430" MinWidth="310">
     <Window.Resources>
         <Style TargetType="Button" BasedOn="{StaticResource ButtonDefault}">
             <Setter Property="Height" Value="50" />
