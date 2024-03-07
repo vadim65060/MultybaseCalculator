@@ -2,7 +2,7 @@
 using System.Windows.Controls;
 using ComboBox = HandyControl.Controls.ComboBox;
 
-namespace Сalculator
+namespace Сalculator.Views
 {
     public partial class MainWindow
     {

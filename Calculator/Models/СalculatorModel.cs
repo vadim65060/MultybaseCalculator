@@ -1,6 +1,7 @@
 ﻿using System;
 using Prism.Mvvm;
 using org.mariuszgromada.math.mxparser;
+using Сalculator.Utilities;
 
 namespace Сalculator.Models
 {

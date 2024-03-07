@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Globalization;
 
-namespace Сalculator
+namespace Сalculator.Utilities
 {
     public static class NumeralSystemConvertor
     {
