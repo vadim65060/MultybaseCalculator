@@ -5,6 +5,7 @@
            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
            xmlns:hc="https://handyorg.github.io/handycontrol"
            xmlns:viewModels="clr-namespace:Сalculator.ViewModels"
+           WindowStartupLocation="CenterScreen"
            mc:Ignorable="d"
            Title="Calculator" Height="430" Width="310" MinHeight="430" MinWidth="310">
     <Window.Resources>

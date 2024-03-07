@@ -50,12 +50,14 @@ namespace Сalculator.ViewModels
                 case "/":
                     return Equation.Length == 0 ||
                            Equation[Equation.Length - 1] == '(' ||
-                           Operators.Contains(Equation[Equation.Length - 1].ToString());
+                           Operators.Contains(Equation[Equation.Length - 1].ToString()) ||
+                           Equation.Contains("NaN");
                 case "-":
                     return Equation.Length != 0 && Operators.Contains(Equation[Equation.Length - 1].ToString());
                 case ",":
                     if (Equation.Length == 0 ||
-                        Equation[Equation.Length - 1] < '0' || Equation[Equation.Length - 1] > '9')
+                        Equation[Equation.Length - 1] < '0' || Equation[Equation.Length - 1] > '9' ||
+                        Equation.Contains("NaN"))
                     {
                         return true;
                     }
@@ -74,6 +76,8 @@ namespace Сalculator.ViewModels
                     }
 
                     return false;
+                case "(":
+                    return Equation.Length != 0 && Equation[Equation.Length - 1] == ',';
                 default:
                     return false;
             }

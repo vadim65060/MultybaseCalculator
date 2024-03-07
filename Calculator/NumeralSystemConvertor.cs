@@ -17,7 +17,7 @@ namespace Сalculator
 
             for (int i = 0; i < separatorIndex; i++)
             {
-                decimalNumber += int.Parse(number[i].ToString()) * (int)Math.Pow(fromBase, separatorIndex - i - 1);
+                decimalNumber += int.Parse(number[i].ToString()) * (int) Math.Pow(fromBase, separatorIndex - i - 1);
             }
 
             for (int i = separatorIndex + 1; i < number.Length; i++)
@@ -34,10 +34,17 @@ namespace Сalculator
             if (toBase < 2 || toBase > 10)
                 throw new ArgumentException("The toBase must be >= 2 and <= 10");
 
-            if (number == 0)
-                return "0";
+            if (double.IsNaN(number) || double.IsInfinity(number))
+                return "NaN";
 
-            int intNumber = (int)number;
+            bool isNegNumber = false;
+            if (number < 0)
+            {
+                number = -number;
+                isNegNumber = true;
+            }
+
+            int intNumber = (int) number;
             double fractionalNumber = number - intNumber;
             string result = (intNumber % toBase).ToString();
 
@@ -53,9 +60,14 @@ namespace Сalculator
                 for (int i = 0; i < precision && fractionalNumber > 0; i++)
                 {
                     double basePow = Math.Pow(toBase, -i - 1);
-                    result += ((int)(fractionalNumber / basePow)).ToString();
-                    fractionalNumber -= (int)(fractionalNumber / basePow) * basePow;
+                    result += ((int) (fractionalNumber / basePow)).ToString();
+                    fractionalNumber -= (int) (fractionalNumber / basePow) * basePow;
                 }
+            }
+
+            if (isNegNumber)
+            {
+                result = "-" + result;
             }
 
             return result;

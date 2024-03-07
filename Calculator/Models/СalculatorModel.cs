@@ -1,4 +1,5 @@
-﻿using Prism.Mvvm;
+﻿using System;
+using Prism.Mvvm;
 using org.mariuszgromada.math.mxparser;
 
 namespace Сalculator.Models
@@ -7,6 +8,7 @@ namespace Сalculator.Models
     {
         public string Equation => _equation;
         public int CountOpenBrackets => _countOpenBrackets;
+
         public int Base
         {
             get => _base;
@@ -18,7 +20,7 @@ namespace Сalculator.Models
                 RaisePropertyChanged();
             }
         }
-        
+
         private string _equation;
         private int _base;
         private int _countOpenBrackets;
@@ -30,12 +32,15 @@ namespace Сalculator.Models
 
         public void Calculate()
         {
+            _equation = _equation.Replace("NaN", "");
             _equation = ConvertNumbersToDecimal(_equation, ',');
             _equation = _equation.Replace(',', '.');
             _equation += new string(')', _countOpenBrackets);
+            _countOpenBrackets = 0;
+            RaisePropertyChanged(nameof(CountOpenBrackets));
             Expression expression = new Expression(_equation);
             _equation = NumeralSystemConvertor.ConvertFromDecimal(expression.calculate(), _base);
-            System.Console.WriteLine(expression.calculate());
+            Console.WriteLine(expression.calculate());
             RaisePropertyChanged(nameof(Equation));
         }
 
@@ -52,6 +57,12 @@ namespace Сalculator.Models
                     RaisePropertyChanged(nameof(CountOpenBrackets));
                     break;
             }
+
+            if (_equation.Contains("NaN"))
+            {
+                _equation = string.Empty;
+            }
+
             _equation += str;
             RaisePropertyChanged(nameof(Equation));
         }
@@ -90,9 +101,10 @@ namespace Сalculator.Models
 
         private string ConvertNumbersToDecimal(string equation, char fractionalSeparator)
         {
-            char[] delimiterChars = { ' ', '+', '-', '*', '/', '(', ')' };
+            char[] delimiterChars = {' ', '+', '-', '*', '/', '(', ')'};
             string[] numbers = _equation.Split(delimiterChars);
             string basedEquation = equation;
+            int lastNumberEnd = 0;
 
             foreach (var number in numbers)
             {
@@ -101,11 +113,14 @@ namespace Сalculator.Models
                     continue;
                 }
 
-                basedEquation = basedEquation.Replace(number,
-                    NumeralSystemConvertor.ConvertToDecimal(number, _base, fractionalSeparator));
+                int numberStart = basedEquation.IndexOf(number, lastNumberEnd, StringComparison.Ordinal);
+                lastNumberEnd = numberStart + number.Length;
+                basedEquation = basedEquation.Substring(0, numberStart) +
+                                NumeralSystemConvertor.ConvertToDecimal(number, _base, fractionalSeparator) +
+                                basedEquation.Substring(lastNumberEnd);
             }
 
-            System.Console.WriteLine(basedEquation);
+            Console.WriteLine(basedEquation);
             return basedEquation;
         }
     }
