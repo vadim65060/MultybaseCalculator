@@ -30,12 +30,14 @@
         <Viewbox Margin="10,120,10,10">
             <hc:UniformSpacingPanel Spacing="2" Orientation="Vertical" HorizontalAlignment="Center">
                 <hc:UniformSpacingPanel Spacing="2" Height="50" HorizontalAlignment="Center">
-                    <Button Content="C" Name="ButtonClear" Command="{Binding ClearCommand}" />
+                    <Button Content="C" Command="{Binding ClearCommand}" />
                     <Button Content="⌫" Command="{Binding EraseCommand}" />
                     <Button Content="," Command="{Binding AddCommand}"
-                            CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Content}" />
+                            CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Content}"
+                            IsEnabled="{Binding CanPrintDot}" />
                     <Button Content="/" Command="{Binding AddCommand}"
-                            CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Content}" />
+                            CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Content}"
+                            IsEnabled="{Binding CanPrintOperator}" />
                 </hc:UniformSpacingPanel>
                 <hc:UniformSpacingPanel Spacing="2" Height="50" HorizontalAlignment="Center">
                     <Button Content="7" Name="Button7" Command="{Binding AddCommand}"
@@ -45,7 +47,8 @@
                     <Button Content="9" Name="Button9" Command="{Binding AddCommand}"
                             CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Content}" />
                     <Button Content="*" Command="{Binding AddCommand}"
-                            CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Content}" />
+                            CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Content}"
+                            IsEnabled="{Binding CanPrintOperator}" />
                 </hc:UniformSpacingPanel>
                 <hc:UniformSpacingPanel Spacing="2" Height="50" HorizontalAlignment="Center">
                     <Button Content="4" Name="Button4" Command="{Binding AddCommand}"
@@ -55,7 +58,8 @@
                     <Button Content="6" Name="Button6" Command="{Binding AddCommand}"
                             CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Content}" />
                     <Button Content="-" Command="{Binding AddCommand}"
-                            CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Content}" />
+                            CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Content}"
+                            IsEnabled="{Binding CanPrintMinus}" />
                 </hc:UniformSpacingPanel>
                 <hc:UniformSpacingPanel Spacing="2" Height="50" HorizontalAlignment="Center">
                     <Button Content="1" Name="Button1" Command="{Binding AddCommand}"
@@ -65,17 +69,19 @@
                     <Button Content="3" Name="Button3" Command="{Binding AddCommand}"
                             CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Content}" />
                     <Button Content="+" Command="{Binding AddCommand}"
-                            CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Content}" />
+                            CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Content}"
+                            IsEnabled="{Binding CanPrintOperator}" />
                 </hc:UniformSpacingPanel>
                 <hc:UniformSpacingPanel Spacing="2" Height="50" HorizontalAlignment="Center">
                     <Button Content="(" Command="{Binding AddCommand}"
-                            CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Content}" />
+                            CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Content}"
+                            IsEnabled="{Binding CanPrintOpenBracket}" />
                     <Button Content="0" Command="{Binding AddCommand}"
                             CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Content}"
                             Name="Button0" />
                     <Button Content=")" Command="{Binding AddCommand}"
                             CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Content}"
-                            IsEnabled="{Binding CountOpenBrackets}" />
+                            IsEnabled="{Binding CanPrintCloseBracket}" />
                     <Button Content="=" Command="{Binding CalculateCommand}" />
                 </hc:UniformSpacingPanel>
             </hc:UniformSpacingPanel>
