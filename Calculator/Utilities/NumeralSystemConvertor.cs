@@ -17,12 +17,20 @@ namespace Сalculator.Utilities
 
             for (int i = 0; i < separatorIndex; i++)
             {
-                decimalNumber += int.Parse(number[i].ToString()) * (int) Math.Pow(fromBase, separatorIndex - i - 1);
+                long delta = int.Parse(number[i].ToString()) * (long) Math.Pow(fromBase, separatorIndex - i - 1);
+                if (decimalNumber >= 0 != decimalNumber + delta >= 0)
+                    return "NaN";
+
+                decimalNumber += delta;
             }
 
             for (int i = separatorIndex + 1; i < number.Length; i++)
             {
-                decimalNumber += int.Parse(number[i].ToString()) * Math.Pow(fromBase, separatorIndex - i);
+                double delta = int.Parse(number[i].ToString()) * Math.Pow(fromBase, separatorIndex - i);
+                if (decimalNumber >= 0 != decimalNumber + delta >= 0)
+                    return "NaN";
+
+                decimalNumber += delta;
             }
 
             return decimalNumber.ToString(CultureInfo.CurrentCulture);
@@ -44,7 +52,12 @@ namespace Сalculator.Utilities
                 isNegNumber = true;
             }
 
-            int intNumber = (int) number;
+            long intNumber = (long) number;
+            if (number >= 0 != intNumber >= 0)
+            {
+                return "NaN";
+            }
+
             double fractionalNumber = number - intNumber;
             string result = (intNumber % toBase).ToString();
 
