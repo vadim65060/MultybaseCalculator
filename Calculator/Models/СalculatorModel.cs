@@ -114,11 +114,12 @@ namespace Сalculator.Models
                     continue;
                 }
 
+                String convertedNumber = NumeralSystemConvertor.ConvertToDecimal(number, _base, fractionalSeparator);
                 int numberStart = basedEquation.IndexOf(number, lastNumberEnd, StringComparison.Ordinal);
-                lastNumberEnd = numberStart + number.Length;
                 basedEquation = basedEquation.Substring(0, numberStart) +
-                                NumeralSystemConvertor.ConvertToDecimal(number, _base, fractionalSeparator) +
-                                basedEquation.Substring(lastNumberEnd);
+                                convertedNumber +
+                                basedEquation.Substring(numberStart + number.Length);
+                lastNumberEnd = numberStart + convertedNumber.Length;
             }
 
             Console.WriteLine(basedEquation);
